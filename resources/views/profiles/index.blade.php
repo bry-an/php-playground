@@ -11,11 +11,11 @@
                 <h1>
                     {{ $user->username }}
                 </h1>
-                <a href="#">Add New Post</a>
+                <a href="/p/create">Add New Post</a>
 
             </div>
             <div class="d-flex">
-                <div class="pr-4"><strong>153</strong> posts</div>
+                <div class="pr-4"><strong>{{ $user->posts->count() }}</strong> posts</div>
                 <div class="pr-4"><strong>24k</strong> followers</div>
                 <div class="pr-4"><strong>212</strong> following</div>
             </div>
@@ -25,9 +25,14 @@
         </div>
     </div>
     <div class="row pt-4">
-        <div class="col-4"><img src="https://via.placeholder.com/350" class="p-1" alt=""></div>
-        <div class="col-4"><img src="https://via.placeholder.com/350" class="p-1" alt=""></div>
-        <div class="col-4"><img src="https://via.placeholder.com/350" class="p-1" alt=""></div>
+        @foreach($user->posts as $post)
+        <div class="col-4 pb-4">
+            <a href="/p/{{ $post->id }}">
+                <img src="/storage/{{ $post->image }}" alt="">
+            </a>
+        </div>
+
+        @endforeach
     </div>
 </div>
 @endsection

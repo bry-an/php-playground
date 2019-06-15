@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
 {
@@ -27,6 +28,8 @@ class PostsController extends Controller
 
         $imagePath = request('image')->store('uploads', 'public'); // first argument is dir second is driver to use (could use s3)
 
+        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
+        $image->save();
         // get authenticated user
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
@@ -36,5 +39,9 @@ class PostsController extends Controller
         // \App\Post::create($data); can't use this since user isn't authenticated
 
         return redirect('/profile/' . auth()->user()->id);
+    }
+    public function show(\App\Post $post) // have access to $post in show.blade.php
+    {
+        return view('posts.show', compact('post'));
     }
 }
