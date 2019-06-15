@@ -6,12 +6,26 @@ use Illuminate\Http\Request;
 
 class profilesController extends Controller
 {
-    public function index($user)
+    public function index(\App\User $user)
     {
-        $user = \App\User::findOrFail($user);
         // references home.blade.php, laravel handles this for us since 'home' is inside /views
-        return view('profiles.index', [ // can pass second arg (an array) into view
-            'user' => $user
+        return view('profiles.index', compact('user'));
+    }
+    public function edit(\App\User $user)
+    {
+        return view('profiles.edit', compact('user'));
+    }
+    public function update(\App\User $user)
+    {
+        $data = request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'url' => 'url',
+            'image' => '',
         ]);
+
+        $user->profile->update($data);
+
+        return redirect("/profile/{$user->id}");
     }
 }
