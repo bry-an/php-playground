@@ -8,9 +8,9 @@ class profilesController extends Controller
 {
     public function index($user)
     {
-        $user = \App\User::find($user);
+        $user = \App\User::findOrFail($user);
         // references home.blade.php, laravel handles this for us since 'home' is inside /views
-        return view('home', [ // can pass second arg (an array) into view
+        return view('profiles.index', [ // can pass second arg (an array) into view
             'user' => $user
         ]);
     }

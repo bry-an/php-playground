@@ -7,19 +7,21 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" alt="">
         </div>
         <div class="col-9 pt-5">
-            <div>
+            <div class="d-flex justify-content-between align-items-baseline">
                 <h1>
                     {{ $user->username }}
                 </h1>
+                <a href="#">Add New Post</a>
+
             </div>
             <div class="d-flex">
                 <div class="pr-4"><strong>153</strong> posts</div>
                 <div class="pr-4"><strong>24k</strong> followers</div>
                 <div class="pr-4"><strong>212</strong> following</div>
             </div>
-            <div class="pt-4" style="font-weight: bold">bry</div>
-            <div>I'm an interesting person who finds other things and people interesting and I'd like to learn more about interesting things.</div>
-            <div><a href="#">www.bryanyunis.com</a></div>
+            <div class="pt-4" style="font-weight: bold">{{ $user->profile->title }}</div>
+            <div>{{ $user->profile->description }}</div>
+            <div><a href="#"> {{ $user->profile->url }}</a></div>
         </div>
     </div>
     <div class="row pt-4">
