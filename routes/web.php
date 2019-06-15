@@ -17,4 +17,4 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show'); // calling the index method inside the home controller

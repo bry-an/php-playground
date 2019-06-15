@@ -23,6 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home'); // references home.blade.php, laravel handles this for us since 'home' is inside /views
     }
 }
