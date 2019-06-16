@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Cache;
 
 class profilesController extends Controller
 {
@@ -12,9 +13,22 @@ class profilesController extends Controller
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
 
+        $postCount = Cache::remember('count.posts.' . $user->id, now()->addSeconds(30), function () use ($user) {
+            return $user->posts->count();
+        });
+
+        $followerCount = Cache::remember('count.followers' . $user->id, now()->addSeconds(30), function () use ($user) {
+            return $user->profile->followers->count();
+        });
+
+        $followingCount = Cache::remember('count.following' . $user->id, now()->addSeconds(30), function () use ($user) {
+            return $user->following->count();
+        });
+
+
 
         // references home.blade.php, laravel handles this for us since 'home' is inside /views
-        return view('profiles.index', compact('user', 'follows'));
+        return view('profiles.index', compact('user', 'follows', 'postCount', 'followerCount', 'followingCount'));
     }
     public function edit(\App\User $user)
     {
