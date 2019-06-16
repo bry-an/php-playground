@@ -8,10 +8,26 @@
         </div>
         <div class="col-4">
             <div>
-                <h3>{{ $post->user->username }}</h3>
-                <p>{{ $post->caption }}</p>
+                <div class="d-flex align-items-center">
+                    <div class="pr-3">
+                        <img src="{{ $post->user->profile->profileImage() }}" style=" max-width: 50px;" class="rounded-circle w-100">
+                    </div>
+                    <div>
+                        <div class="font-weight-bold text-dark">
+                            <a href="/profile/{{ $post->user->id }}">
+                                <span class="text-dark">{{ $post->user->username }}</span>
+                            </a>
+                            <a href="#" class="pl-3">Follow</a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div>
+                    <p><a href="/profile/{{ $post->user->id }}"><span class="font-weight-bold text-dark">{{ $post->user->username }}</span></a> {{ $post->caption }}</p>
+                </div>
             </div>
         </div>
+
     </div>
 </div>
 @endsection
