@@ -40,6 +40,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected static function boot()
+    {
+        parent::boot(); // gets called when this model is getting booted
+
+        // gets fired whenever a new user is created
+        static::created(function ($user) {
+            $user->profile()->create([
+                'title' => $user->username,
+            ]);
+        });
+    }
+
     public function profile()
     {
         return $this->hasOne(Profile::class);

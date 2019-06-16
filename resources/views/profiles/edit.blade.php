@@ -26,7 +26,7 @@
 
                     <input id="description" type="text" name="description" class="form-control @error('description') is-invalid @enderror" title="description" value="{{ old('description') ?? $user->profile->description }}" required autocomplete="description" autofocus>
 
-                    @error('title')
+                    @error('description')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
