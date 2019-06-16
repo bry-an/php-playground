@@ -10,8 +10,11 @@ class profilesController extends Controller
 
     public function index(\App\User $user)
     {
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+
+
         // references home.blade.php, laravel handles this for us since 'home' is inside /views
-        return view('profiles.index', compact('user'));
+        return view('profiles.index', compact('user', 'follows'));
     }
     public function edit(\App\User $user)
     {
@@ -19,6 +22,7 @@ class profilesController extends Controller
 
         return view('profiles.edit', compact('user'));
     }
+
     public function update(\App\User $user)
     {
         $this->authorize('update', $user->profile);
