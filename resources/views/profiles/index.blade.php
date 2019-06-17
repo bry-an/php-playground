@@ -25,6 +25,8 @@
             <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
             @endcan
 
+            <counts-display post-count="{{ $postCount }}" follower-count="{{ $followerCount}}" following-count="{{ $followingCount }}" />
+
             <div class="d-flex">
                 <div class="pr-4"><strong>{{ $postCount }}</strong> posts</div>
                 <div class="pr-4"><strong>{{ $followerCount }}</strong> followers</div>

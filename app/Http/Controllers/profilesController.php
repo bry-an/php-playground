@@ -27,7 +27,7 @@ class profilesController extends Controller
 
 
 
-        // references home.blade.php, laravel handles this for us since 'home' is inside /views
+        // references home.blade.php, laravel handles this for us since 'profiles' is inside /views
         return view('profiles.index', compact('user', 'follows', 'postCount', 'followerCount', 'followingCount'));
     }
     public function edit(\App\User $user)
