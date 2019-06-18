@@ -45,6 +45,7 @@ class User extends Authenticatable
     protected static function boot()
     {
         parent::boot(); // gets called when this model is getting booted
+        // Reference to EventServiceProvider::boot
 
         // gets fired whenever a new user is created
         static::created(function ($user) {
